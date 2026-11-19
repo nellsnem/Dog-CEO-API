@@ -14,16 +14,19 @@
 
 1. **Створити базу даних у PostgreSQL** (наприклад, ApiLabDB) та виконати цей SQL-скрипт у pgAdmin, щоб створити дві пов'язані таблиці:
    ```sql
-   CREATE TABLE IF NOT EXISTS Breeds (
-       Id SERIAL PRIMARY KEY,
-       Name VARCHAR(100) UNIQUE NOT NULL
-   );
+-- Таблиця 1: Породи собак
+CREATE TABLE IF NOT EXISTS Breeds (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(100) UNIQUE NOT NULL
+);
 
-   CREATE TABLE IF NOT EXISTS Photos (
-       Id SERIAL PRIMARY KEY,
-       ImageUrl TEXT UNIQUE NOT NULL,
-       BreedId INT NOT NULL REFERENCES Breeds(Id) ON DELETE CASCADE
-   );
+-- Таблиця 2: Фото собак
+CREATE TABLE IF NOT EXISTS Photos (
+    Id SERIAL PRIMARY KEY,
+    ImageUrl VARCHAR(255) UNIQUE NOT NULL,
+    BreedId INT NOT NULL,
+    CONSTRAINT FK_Breed FOREIGN KEY (BreedId) REFERENCES Breeds(Id)
+);
 ## Скриншоти роботи
 <img width="846" height="512" alt="image" src="https://github.com/user-attachments/assets/869e38bb-0f17-447f-aab0-8ec1ae15477c" />
 <img width="671" height="262" alt="image" src="https://github.com/user-attachments/assets/c0a3cf82-6027-43f9-bbc3-55b2649c5795" />
